@@ -519,7 +519,7 @@ $section->addInput(new Form_Input(
 	'*Hostname',
 	'text',
 	$pconfig['hostname'],
-	['placeholder' => 'pfSense']
+	['placeholder' => 'Kontrol']
 ))->setHelp('Name of the firewall host, without domain part.');
 
 $section->addInput(new Form_Input(
@@ -704,7 +704,7 @@ $section->addInput(new Form_Select(
 	$pconfig['logincss'],
 	["1e3f75;" => gettext("Dark Blue"), "003300" => gettext("Dark green"), "770101" => gettext("Crimson red"),
 	 "4b1263" => gettext("Purple"), "424142" => gettext("Gray"), "333333" => gettext("Dark gray"),
-	 "000000" => gettext("Black"), "633215" => gettext("Dark brown"), "bf7703" => gettext("Brown"), 
+	 "000000" => gettext("Black"), "633215" => gettext("Dark brown"), "bf7703" => gettext("Brown"),
 	 "008000" => gettext("Green"), "007faa" => gettext("Light Blue"), "dc2a2a" => gettext("Red"),
 	 "9b59b6" => gettext("Violet")]
 ))->setHelp('Choose a color for the login page');
@@ -740,7 +740,7 @@ $csswarning = sprintf(gettext("%sUser-created themes are unsupported, use at you
 events.push(function() {
 
 	function setThemeWarning() {
-		if ($('#webguicss').val().startsWith("pfSense")) {
+		if ($('#webguicss').val().startsWith("Kontrol")) {
 			$('#csstxt').html("").addClass("text-default");
 		} else {
 			$('#csstxt').html("<?=$csswarning?>").addClass("text-danger");

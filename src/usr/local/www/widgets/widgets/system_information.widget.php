@@ -180,7 +180,7 @@ $temp_use_f = (isset($user_settings['widgets']['thermal_sensors-0']) && !empty($
 				if (isset($platform['descr'])) {
 					echo $platform['descr'];
 				} else {
-					echo gettext('Unknown system');
+					echo gettext('Kontrol system');
 				}
 
 				$serial = system_get_serial();
@@ -190,12 +190,12 @@ $temp_use_f = (isset($user_settings['widgets']['thermal_sensors-0']) && !empty($
 				}
 
 				// If the uniqueID is available, display it here
-				$uniqueid = system_get_uniqueid();
-				if (!empty($uniqueid)) {
-					print("<br />" .
-					    gettext("Netgate Device ID:") .
-					    " <strong>{$uniqueid}</strong>");
-				}
+				//$uniqueid = system_get_uniqueid();
+				//if (!empty($uniqueid)) {
+					//print("<br />" .
+					    //gettext("Netgate Device ID:") .
+					    //" <strong>{$uniqueid}</strong>");
+				//}
 ?>
 			</td>
 		</tr>
