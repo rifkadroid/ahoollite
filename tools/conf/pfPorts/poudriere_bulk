@@ -88,7 +88,7 @@ sysutils/%%PRODUCT_NAME%%-pkg-Backup
 sysutils/%%PRODUCT_NAME%%-pkg-Cron
 sysutils/%%PRODUCT_NAME%%-pkg-filer
 sysutils/%%PRODUCT_NAME%%-pkg-LCDproc
-sysutils/%%PRODUCT_NAME%%-pkg-Netgate_Firmware_Upgrade
+
 sysutils/%%PRODUCT_NAME%%-pkg-node_exporter
 sysutils/%%PRODUCT_NAME%%-pkg-Notes
 sysutils/%%PRODUCT_NAME%%-pkg-nut
@@ -114,3 +114,9 @@ www/%%PRODUCT_NAME%%-pkg-Lightsquid
 www/%%PRODUCT_NAME%%-pkg-squid
 www/%%PRODUCT_NAME%%-pkg-squidGuard
 www/pound
+converters/base64
+www/sarg
+www/Kontrol-pkg-sarg
+www/e2guardian
+www/Kontrol-pkg-E2guardian5
+www/Kontrol-pkg-KontrolSquid
