@@ -204,7 +204,7 @@ function gen_webguicss_field(&$section, $value) {
 	$csslist = get_css_files();
 
 	if (!isset($csslist[$value])) {
-		$value = "pfSense.css";
+		$value = "Kontrol.css";
 	}
 
 	$section->addInput(new Form_Select(
@@ -527,7 +527,7 @@ function hardware_offloading_applyflags($iface) {
 	/* disable hardware checksum offloading for VirtIO network drivers,
 	 * see https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=165059 */
 	if (config_path_enabled('system','disablechecksumoffloading') ||
-	    stristr($iface, "vtnet") || stristr($iface, "ena")) { 
+	    stristr($iface, "vtnet") || stristr($iface, "ena")) {
 		if (isset($options['encaps']['txcsum'])) {
 			$flags_off |= IFCAP_TXCSUM;
 		}
@@ -710,7 +710,7 @@ function enable_carp(bool $enable=true) {
 		set_single_sysctl("net.inet.carp.allow", $enable?"1":"0");
 	}
 }
-	
+
 /*
  * convert_ip_to_network_format($ip, $subnet): converts an ip address to network form
  */
@@ -756,7 +756,7 @@ function get_carp_bind_status($interface) {
 		return $carpstatus;
 	} else {
 		foreach (config_get_path('virtualip/vip', []) as $vip) {
-			if ($interface == "_vip{$vip['uniqid']}") { 
+			if ($interface == "_vip{$vip['uniqid']}") {
 				return get_carp_interface_status($vip['interface']);
 			}
 		}
@@ -2827,7 +2827,7 @@ function get_country_name($country_code = "ALL") {
 		return "";
 	}
 
-	$country_names_xml = "/usr/local/share/pfSense/iso_3166-1_list_en.xml";
+	$country_names_xml = "/usr/local/share/Kontrol/iso_3166-1_list_en.xml";
 	$country_names_contents = file_get_contents($country_names_xml);
 	$country_names = xml2array($country_names_contents);
 
@@ -3038,7 +3038,7 @@ function where_is_ipaddr_configured($ipaddr, $ignore_if = "", $check_localip = f
 				$if_ipv6 = get_interface_ipv6($if);
 				$if_snbitsv6 = get_interface_subnetv6($if);
 				/* do not check subnet overlapping on 6rd interfaces,
-				 * see https://redmine.pfsense.org/issues/12371 */ 
+				 * see https://redmine.pfsense.org/issues/12371 */
 				if ($if_ipv6 && $if_snbitsv6 &&
 				    ((config_get_path("interfaces/{$if}/ipaddrv6") != '6rd') || ($cidrprefix > $if_snbitsv6)) &&
 				    check_subnetsv6_overlap($ipaddr, $cidrprefix, $if_ipv6, $if_snbitsv6)) {
@@ -3241,7 +3241,7 @@ function merge_ipv6_delegated_prefix($prefix, $suffix, $len = 64) {
 		$suffix_list[count($suffix_list) - 1] = substr($hexsuffix, 0, 4);
 		$suffix_list[] = substr($hexsuffix, 4, 8);
 		$suffix = implode(':', $suffix_list);
-	}	
+	}
 	$prefix = Net_IPv6::uncompress($prefix, true);
 	$suffix = Net_IPv6::uncompress($suffix, true);
 

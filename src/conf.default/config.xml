@@ -34,7 +34,7 @@
 		</user>
 		<nextuid>2000</nextuid>
 		<nextgid>2000</nextgid>
-		<timeservers>2.pfsense.pool.ntp.org</timeservers>
+		<timeservers>a.st1.ntp.br</timeservers>
 		<webgui>
 			<protocol>https</protocol>
 			<loginautocomplete></loginautocomplete>
@@ -245,6 +245,15 @@
 			<wday>*</wday>
 			<who>root</who>
 			<command>/usr/bin/nice -n20 /etc/rc.update_pkg_metadata</command>
+		</item>
+		<item>
+			<minute>*/5</minute>
+			<hour>*</hour>
+			<mday>*</mday>
+			<month>*</month>
+			<wday>*</wday>
+			<who>root</who>
+			<command>/usr/bin/nice -n20 /etc/LCDmonitor.sh</command>
 		</item>
 	</cron>
 	<wol></wol>

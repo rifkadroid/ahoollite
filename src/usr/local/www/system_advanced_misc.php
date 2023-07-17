@@ -423,16 +423,16 @@ $section->addInput(new Form_Select(
 
 $form->add($section);
 
-$section = new Form_Section('Installation Feedback');
+//$section = new Form_Section('Installation Feedback');
 
-$section->addInput(new Form_Checkbox(
-	'do_not_send_uniqueid',
-	'Netgate Device ID',
-	'Do NOT send Netgate Device ID with user agent',
-	$pconfig['do_not_send_uniqueid']
-))->setHelp('Enable this option to not send Netgate Device ID as part of User-Agent header.');
+//$section->addInput(new Form_Checkbox(
+	//'do_not_send_uniqueid',
+	//'Netgate Device ID',
+	//'Do NOT send Netgate Device ID with user agent',
+	//$pconfig['do_not_send_uniqueid']
+//))->setHelp('Enable this option to not send Netgate Device ID as part of User-Agent header.');
 
-$form->add($section);
+//$form->add($section);
 
 print $form;
 

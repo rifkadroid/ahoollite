@@ -710,7 +710,7 @@ class pfsense_xmlrpc_server {
 		setup_gateways_monitor();
 
 		/* do not restart unchanged services on XMLRPC sync,
-		 * see https://redmine.pfsense.org/issues/11082 
+		 * see https://redmine.pfsense.org/issues/11082
 		 */
 		if (is_array($config['openvpn']) || is_array($old_config['openvpn'])) {
 			foreach (array("server", "client") as $type) {
@@ -931,7 +931,7 @@ class pfsense_xmlrpc_server {
 		} elseif ($arguments['op'] === 'write_usedmacs') {
 			$arguments = unserialize(base64_decode($arguments['arguments']));
 
-			captiveportal_write_usedmacs_db($arguments['usedmacs']); 
+			captiveportal_write_usedmacs_db($arguments['usedmacs']);
 			return true;
 		}
 	}
@@ -978,7 +978,7 @@ XML_RPC2_Backend::setBackend('php');
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 
 $options = array(
-	'prefix' => 'pfsense.',
+	'prefix' => 'kontrol.',
 	'encoding' => 'utf-8',
 	'autoDocument' => false,
 );

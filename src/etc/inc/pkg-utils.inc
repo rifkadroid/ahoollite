@@ -476,7 +476,7 @@ function get_pkg_info($pkgs = 'all', $remote_repo_usage_disabled = false,
 
 		/* XXX: Add it to globals.inc? */
 		$pkg_info['changeloglink'] =
-		    "https://github.com/pfsense/FreeBSD-ports/commits/devel/" .
+		    "https://github.com/kontrol-br/FreeBSD-ports/commits/devel/" .
 		    $pkg_info['categories'][0] . '/' . $pkg_info['name'];
 
 		$pkg_is_installed = false;
@@ -736,7 +736,7 @@ function read_package_configurationfile($package_name) {
 	$pkg_config = array();
 	$id = get_package_id($package_name);
 	$pkg_data = config_get_path("installedpackages/package/{$id}", []);
-   
+
 	if ($id < 0 || empty($pkg_data)) {
 		return $pkg_config;
 	}
@@ -1173,7 +1173,7 @@ function package_reinstall_all() {
 		return false;
 	}
 
-	if (!empty($pkgs)) { 
+	if (!empty($pkgs)) {
 		$pkg_info = get_pkg_info();
 	}
 

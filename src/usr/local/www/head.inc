@@ -38,7 +38,7 @@ if ($user_settings['webgui']['pagenamefirst']) {
 	$tabtitle = htmlspecialchars($system_url) . " - " . $pagetitle;
 }
 
-$cssfile = "/css/pfSense.css";
+$cssfile = "/css/Kontrol.css";
 
 if (isset($user_settings['webgui']['webguicss'])) {
 	if (file_exists("/usr/local/www/css/" . $user_settings['webgui']['webguicss'])) {
@@ -252,7 +252,7 @@ $system_menu[] = array(gettext("Package Manager"), "/pkg_mgr_installed.php");
 $system_menu[] = array(gettext("Setup Wizard"), "/wizard.php?xml=setup_wizard.xml");
 $system_menu[] = array(gettext("Routing"), "/system_gateways.php");
 $system_menu[] = array(gettext("Certificates"), "/system_camanager.php");
-$system_menu[] = array(gettext("Register"), "/system_register.php");
+//$system_menu[] = array(gettext("Register"), "/system_register.php");
 
 if (!isAllowedPage("system_usermanager.php")) {
 	$system_menu[] = array(gettext("User Manager"), "/system_usermanager_passwordmg.php");
@@ -317,7 +317,7 @@ $firewall_menu = msort(array_merge($firewall_menu, return_ext_menu("Firewall")),
 
 // Services
 $services_menu = array();
-$services_menu[] = array(gettext("Auto Config Backup"), "/services_acb_settings.php");
+//$services_menu[] = array(gettext("Auto Config Backup"), "/services_acb_settings.php");
 $services_menu[] = array(gettext("Captive Portal"), "/services_captiveportal.php");
 $services_menu[] = array(gettext("DNS Forwarder"), "/services_dnsmasq.php");
 $services_menu[] = array(gettext("DNS Resolver"), "/services_unbound.php");
@@ -331,6 +331,7 @@ if (g_get('services_dhcp_server_enable')) {
 
 $services_menu[] = array(gettext("Dynamic DNS"), "/services_dyndns.php");
 $services_menu[] = array(gettext("IGMP Proxy"), "/services_igmpproxy.php");
+if (file_exists("/usr/local/www/ad_remove.php")) {$services_menu[] = array(gettext("Kontrol-ID Config"), "/ad_remove.php");}
 $services_menu[] = array(gettext("NTP"), "/services_ntpd.php");
 $services_menu[] = array(gettext("PPPoE Server"), "/services_pppoe.php");
 $services_menu[] = array(gettext("SNMP"), "/services_snmp.php");
@@ -429,17 +430,17 @@ if (!g_get('disablehelpmenu')) {
 	$help_menu = array();
 	$help_menu[] = array(gettext("About this Page"), $helpurl);
 	if (g_get('product_name') == "pfSense") {
-		$help_menu[] = array(gettext("Bug Database"), "https://redirects.netgate.com/issues");
+		$help_menu[] = array(gettext("Bug Database"), "https://kontrol.com.br/");
 	}
 
-	$help_menu[] = array(gettext("User Forum"), "https://redirects.netgate.com/forum");
-	$help_menu[] = array(gettext("Documentation"), "https://redirects.netgate.com/docs");
-	$help_menu[] = array(gettext("Paid Support"), "https://redirects.netgate.com/support");
-	$help_menu[] = array(gettext("pfSense Book"), "https://redirects.netgate.com/book");
-	$help_menu[] = array(gettext("FreeBSD Handbook"), "https://redirects.netgate.com/fbsdhandbook");
-	$help_menu[] = array(gettext("User survey"), "https://redirects.netgate.com/survey_1");
+	$help_menu[] = array(gettext("User Forum"), "https://kontrol.com.br");
+	$help_menu[] = array(gettext("Documentation"), "https://kontrol.com.br");
+	$help_menu[] = array(gettext("Paid Support"), "https://kontrol.com.br");
+	$help_menu[] = array(gettext("Kontrol Book"), "https://kontrol.com.br");
+	$help_menu[] = array(gettext("FreeBSD Handbook"), "https://kontrol.com.br");
+	$help_menu[] = array(gettext("User survey"), "https://kontrol.com.br");
 	if  (strpos(g_get('product_label'), 'Plus') === false) {
-		$help_menu[] = array(gettext("Upgrade to pfSense Plus"), "https://redirects.netgate.com/upgrade");
+		$help_menu[] = array(gettext("Upgrade to pfSense Plus"), "https://kontrol.com.br");
 	}
 	$help_menu = msort(array_merge($help_menu, return_ext_menu("Help")), 0);
 }
@@ -482,7 +483,7 @@ if (are_notices_pending()) {
 			</button>
 			<a class="navbar-brand" href="/">
 				<?php include("/usr/local/www/logo.svg"); ?>
-				<span style="color:white;font-size:.5em;text-transform:uppercase;letter-spacing:1px;">Community Edition</span>
+				<span style="color:white;font-size:.6em;text-transform:uppercase;letter-spacing:3px;">KONTROL UTM</span>
 			</a>
 		</div>
 		<div class="collapse navbar-collapse" id="pf-navbar">
