@@ -56,8 +56,8 @@ fi
 # Define pfSense versions
 PKG_REPO_BRANCH_DEVEL="devel"
 #PKG_REPO_BRANCH_NEXT="v2_7_0"
-PKG_REPO_BRANCH_RELEASE="v2_6_0"
-PKG_REPO_BRANCH_PREVIOUS="v2_5_2"
+PKG_REPO_BRANCH_RELEASE="v2_7_0"
+PKG_REPO_BRANCH_PREVIOUS="v2_6_2"
 
 # Make sure pkg will not be interactive
 export ASSUME_ALWAYS_YES=true
@@ -73,13 +73,13 @@ if [ ! -d ${SCRATCHDIR} ]; then
 fi
 
 # Product details
-export PRODUCT_NAME=${PRODUCT_NAME:-"nonSense"}
+export PRODUCT_NAME=${PRODUCT_NAME:-"Kontrol"}
 export PRODUCT_NAME_SUFFIX=${PRODUCT_NAME_SUFFIX:-"-CE"}
 export REPO_BRANCH_PREFIX=${REPO_BRANCH_PREFIX:-""}
 export REPO_PATH_PREFIX=$(echo "${REPO_BRANCH_PREFIX}" | sed -e 's,-,_,g')
 export PRODUCT_URL=${PRODUCT_URL:-""}
 export PRODUCT_SRC=${PRODUCT_SRC:-"${BUILDER_ROOT}/src"}
-export PRODUCT_EMAIL=${PRODUCT_EMAIL:-"coreteam@pfsense.org"}
+export PRODUCT_EMAIL=${PRODUCT_EMAIL:-"contato@kontrol.com.br"}
 export XML_ROOTOBJ=${XML_ROOTOBJ:-$(echo "${PRODUCT_NAME}" | tr '[[:upper:]]' '[[:lower:]]')}
 
 if [ "${PRODUCT_NAME}" = "pfSense" -a "${BUILD_AUTHORIZED_BY_NETGATE}" != "yes" ]; then
