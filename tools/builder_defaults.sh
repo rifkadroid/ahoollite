@@ -5,7 +5,7 @@
 # part of pfSense (https://www.pfsense.org)
 # Copyright (c) 2004-2013 BSD Perimeter
 # Copyright (c) 2013-2016 Electric Sheep Fencing
-# Copyright (c) 2014-2023 Rubicon Communications, LLC (Netgate)
+# Copyright (c) 2014-2022 Rubicon Communications, LLC (Netgate)
 # All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,12 +53,6 @@ if [ -f ${BUILD_CONF} ]; then
 	. ${BUILD_CONF}
 fi
 
-# Define pfSense versions
-PKG_REPO_BRANCH_DEVEL="devel"
-PKG_REPO_BRANCH_NEXT="v2_8_0"
-PKG_REPO_BRANCH_RELEASE="v2_7_0"
-PKG_REPO_BRANCH_PREVIOUS="v2_6_0"
-
 # Make sure pkg will not be interactive
 export ASSUME_ALWAYS_YES=true
 
@@ -79,7 +73,7 @@ export REPO_BRANCH_PREFIX=${REPO_BRANCH_PREFIX:-""}
 export REPO_PATH_PREFIX=$(echo "${REPO_BRANCH_PREFIX}" | sed -e 's,-,_,g')
 export PRODUCT_URL=${PRODUCT_URL:-""}
 export PRODUCT_SRC=${PRODUCT_SRC:-"${BUILDER_ROOT}/src"}
-export PRODUCT_EMAIL=${PRODUCT_EMAIL:-"contato@kontrol.com.br"}
+export PRODUCT_EMAIL=${PRODUCT_EMAIL:-"contato@konntrol.com.br"}
 export XML_ROOTOBJ=${XML_ROOTOBJ:-$(echo "${PRODUCT_NAME}" | tr '[[:upper:]]' '[[:lower:]]')}
 
 if [ "${PRODUCT_NAME}" = "pfSense" -a "${BUILD_AUTHORIZED_BY_NETGATE}" != "yes" ]; then
@@ -146,7 +140,7 @@ export MAKEOBJDIRPREFIX=${MAKEOBJDIRPREFIX:-"${SCRATCHDIR}/obj"}
 
 if [ -z "${MODULES_OVERRIDE}" ]; then
 	export MODULES_OVERRIDE_base="cc/cc_cdg cc/cc_chd cc/cc_cubic cc/cc_dctcp cc/cc_hd cc/cc_htcp cc/cc_vegas cryptodev dummynet fdescfs hwpmc i2c if_stf ipdivert ipfw ipfw_nat64 opensolaris usb/cdce usb/ipheth usb/ure usb/urndis zfs"
-	export MODULES_OVERRIDE_amd64="${MODULES_OVERRIDE_base} aesni amdsmn amdtemp blake2 coretemp cpuctl cxgbe/tom      ipmi ix ixv nmdm qlnx sfxge vmm"
+	export MODULES_OVERRIDE_amd64="${MODULES_OVERRIDE_base} aesni amdsmn amdtemp blake2 coretemp cpuctl drm2 ipmi ix ixv ndis nmdm qlnx sfxge vmm"
 	export MODULES_OVERRIDE="${MODULES_OVERRIDE_amd64}"
 fi
 
@@ -298,8 +292,12 @@ export PKG_REPO_SERVER_RELEASE=${PKG_REPO_SERVER_RELEASE:-"pkg+https://packages.
 export PKG_REPO_SERVER_STAGING=${PKG_REPO_SERVER_STAGING:-"pkg+http://${STAGING_HOSTNAME}/ce/packages"}
 
 if [ -n "${_IS_RELEASE}" -o -n "${_IS_RC}" ]; then
+	export PKG_REPO_BRANCH_RELEASE=${PKG_REPO_BRANCH_RELEASE:-"${REPO_BRANCH_PREFIX}v2_6_0"}
+	export PKG_REPO_BRANCH_DEVEL=${PKG_REPO_BRANCH_DEVEL:-${POUDRIERE_BRANCH}}
 	export PKG_REPO_BRANCH_STAGING=${PKG_REPO_BRANCH_STAGING:-${PKG_REPO_BRANCH_RELEASE}}
 else
+	export PKG_REPO_BRANCH_RELEASE=${PKG_REPO_BRANCH_RELEASE:-"${REPO_BRANCH_PREFIX}v2_6_0"}
+	export PKG_REPO_BRANCH_DEVEL=${PKG_REPO_BRANCH_DEVEL:-${POUDRIERE_BRANCH}}
 	export PKG_REPO_BRANCH_STAGING=${PKG_REPO_BRANCH_STAGING:-${PKG_REPO_BRANCH_DEVEL}}
 fi
 
@@ -320,7 +318,7 @@ export CORE_PKG_REAL_PATH="${CORE_PKG_PATH}/.real_${DATESTRING}"
 export CORE_PKG_ALL_PATH="${CORE_PKG_PATH}/All"
 
 export PKG_REPO_BASE=${PKG_REPO_BASE:-"${BUILDER_TOOLS}/templates/pkg_repos"}
-export PFSENSE_DEFAULT_REPO="${PRODUCT_NAME}-repo-devel"
+export PFSENSE_DEFAULT_REPO="${PRODUCT_NAME}-repo"
 export PKG_REPO_DEFAULT=${PKG_REPO_DEFAULT:-"${PKG_REPO_BASE}/${PFSENSE_DEFAULT_REPO}.conf"}
 export PFSENSE_BUILD_REPO="${PFSENSE_DEFAULT_REPO}"
 export PKG_REPO_BUILD=${PKG_REPO_BUILD:-"${PKG_REPO_BASE}/${PFSENSE_BUILD_REPO}.conf"}
@@ -373,6 +371,6 @@ if [ "${PRODUCT_NAME}" = "pfSense" ]; then
 	export VENDOR_NAME=${VENDOR_NAME:-"Rubicon Communications, LLC (Netgate)"}
 	export OVF_INFO=${OVF_INFO:-"pfSense is a free, open source customized distribution of FreeBSD tailored for use as a firewall and router. In addition to being a powerful, flexible firewalling and routing platform, it includes a long list of related features and a package system allowing further expandability without adding bloat and potential security vulnerabilities to the base distribution. pfSense is a popular project with more than 1 million downloads since its inception, and proven in countless installations ranging from small home networks protecting a PC and an Xbox to large corporations, universities and other organizations protecting thousands of network devices."}
 else
-	export VENDOR_NAME=${VENDOR_NAME:-"nonSense"}
+	export VENDOR_NAME=${VENDOR_NAME:-"Kontrol"}
 	export OVF_INFO=${OVF_INFO:-"none"}
 fi
