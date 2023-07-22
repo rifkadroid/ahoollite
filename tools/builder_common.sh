@@ -5,7 +5,7 @@
 # part of pfSense (https://www.pfsense.org)
 # Copyright (c) 2004-2013 BSD Perimeter
 # Copyright (c) 2013-2016 Electric Sheep Fencing
-# Copyright (c) 2014-2023 Rubicon Communications, LLC (Netgate)
+# Copyright (c) 2014-2022 Rubicon Communications, LLC (Netgate)
 # All rights reserved.
 #
 # FreeSBIE portions of the code
@@ -273,35 +273,35 @@ make_world() {
 	# Use the builder cross compiler from obj to produce the final binary.
 	BUILD_CC="${MAKEOBJDIRPREFIX}${FREEBSD_SRC_DIR}/${TARGET}.${TARGET_ARCH}/tmp/usr/bin/cc"
 
-	#[ -f "${BUILD_CC}" ] || print_error_pfS
+	[ -f "${BUILD_CC}" ] || print_error_pfS
 
 	# XXX It must go to the scripts
-	#[ -d "${STAGE_CHROOT_DIR}/usr/local/bin" ] \
-#		|| mkdir -p ${STAGE_CHROOT_DIR}/usr/local/bin
-	#makeargs="CC=${BUILD_CC} DESTDIR=${STAGE_CHROOT_DIR}"
-	#echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Starting - $(LC_ALL=C date))" | tee -a ${LOGFILE}
+	[ -d "${STAGE_CHROOT_DIR}/usr/local/bin" ] \
+		|| mkdir -p ${STAGE_CHROOT_DIR}/usr/local/bin
+	makeargs="CC=${BUILD_CC} DESTDIR=${STAGE_CHROOT_DIR}"
+	echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Starting - $(LC_ALL=C date))" | tee -a ${LOGFILE}
 	#(script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/crypto ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
 	# XXX FIX IT
 #	(script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/ath/athstats ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
-	#echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Finished - $(LC_ALL=C date))" | tee -a ${LOGFILE}
+	echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Finished - $(LC_ALL=C date))" | tee -a ${LOGFILE}
 
-	# if [ "${PRODUCT_NAME}" = "pfSense" -a -n "${GNID_REPO_BASE}" ]; then
-	# 	echo ">>> Building gnid... " | tee -a ${LOGFILE}
-	# 	(\
-	# 		cd ${GNID_SRC_DIR} && \
-	# 		make \
-	# 			CC=${BUILD_CC} \
-	# 			INCLUDE_DIR=${GNID_INCLUDE_DIR} \
-	# 			LIBCRYPTO_DIR=${GNID_LIBCRYPTO_DIR} \
-	# 		clean gnid \
-	# 	) || print_error_pfS
-	# 	install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
-	# 		${STAGE_CHROOT_DIR}/usr/sbin \
-	# 		|| print_error_pfS
-	# 	install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
-	# 		${INSTALLER_CHROOT_DIR}/usr/sbin \
-	# 		|| print_error_pfS
-	# fi
+	if [ "${PRODUCT_NAME}" = "pfSense" -a -n "${GNID_REPO_BASE}" ]; then
+		echo ">>> Building gnid... " | tee -a ${LOGFILE}
+		(\
+			cd ${GNID_SRC_DIR} && \
+			make \
+				CC=${BUILD_CC} \
+				INCLUDE_DIR=${GNID_INCLUDE_DIR} \
+				LIBCRYPTO_DIR=${GNID_LIBCRYPTO_DIR} \
+			clean gnid \
+		) || print_error_pfS
+		install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
+			${STAGE_CHROOT_DIR}/usr/sbin \
+			|| print_error_pfS
+		install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
+			${INSTALLER_CHROOT_DIR}/usr/sbin \
+			|| print_error_pfS
+	fi
 
 	unset makeargs
 }
@@ -651,7 +651,6 @@ clone_to_staging_area() {
 	echo force > ${STAGE_CHROOT_DIR}/cf/conf/enableserial_force
 
 	core_pkg_create default-config-serial "" ${CORE_PKG_VERSION} ${STAGE_CHROOT_DIR}
-	core_pkg_create default-config "bhyve" ${CORE_PKG_VERSION} ${STAGE_CHROOT_DIR}
 
 	rm -f ${STAGE_CHROOT_DIR}/cf/conf/enableserial_force
 	rm -f ${STAGE_CHROOT_DIR}/cf/conf/config.xml
@@ -1375,15 +1374,15 @@ pkg_repo_rsync() {
 			print_error_pfS
 		fi
 
-		local _pkgfile="${_repo_path}/Latest/pkg.pkg"
+		local _pkgfile="${_repo_path}/Latest/pkg.txz"
 		if [ -e ${_pkgfile} ]; then
-			echo -n ">>> Signing Latest/pkg.pkg for bootstrapping... " | tee -a ${_logfile}
+			echo -n ">>> Signing Latest/pkg.txz for bootstraping... " | tee -a ${_logfile}
 
 			if sha256 -q ${_pkgfile} | ${PKG_REPO_SIGNING_COMMAND} \
 			    > ${_pkgfile}.sig 2>/dev/null; then
 				# XXX Temporary workaround to create link to pkg sig
-				[ -e ${_repo_path}/Latest/pkg.txz ] && \
-					ln -sf pkg.pkg.sig ${_repo_path}/Latest/pkg.txz.sig
+				[ -e ${_repo_path}/Latest/pkg.pkg ] && \
+					ln -sf pkg.txz.sig ${_repo_path}/Latest/pkg.pkg.sig
 				echo "Done!" | tee -a ${_logfile}
 			else
 				echo "Failed!" | tee -a ${_logfile}
@@ -1581,30 +1580,24 @@ poudriere_rename_ports() {
 			  -e "/^MAINTAINER=/ s,^.*$,MAINTAINER=	${PRODUCT_EMAIL}," \
 			${_pdir}/${_pname}/Makefile ${_pdescr} ${_plist}
 
-			# PHP module is special
-			if echo "${_pname}" | grep -q "^php[0-9]*-${PRODUCT_NAME}-module"; then
-				local _product_capital=$(echo ${PRODUCT_NAME} | tr '[a-z]' '[A-Z]')
-				sed -i '' -e "s,PHP_PFSENSE,PHP_${_product_capital},g" \
-					  -e "s,PFSENSE_SHARED_LIBADD,${_product_capital}_SHARED_LIBADD,g" \
-					  -e "s,pfSense,${PRODUCT_NAME},g" \
-					  -e "s,pfSense_arginfo.h,${PRODUCT_NAME}_arginfo\.h,g" \
-					  -e "s,pfSense_private.h,${PRODUCT_NAME}_private\.h,g" \
-					  -e "s,pfSense.c,${PRODUCT_NAME}\.c,g" \
-					${_pdir}/${_pname}/files/config.m4
+		# PHP module is special
+		if echo "${_pname}" | grep -q "^php[0-9]*-${PRODUCT_NAME}-module"; then
+			local _product_capital=$(echo ${PRODUCT_NAME} | tr '[a-z]' '[A-Z]')
+			sed -i '' -e "s,PHP_PFSENSE,PHP_${_product_capital},g" \
+				  -e "s,PFSENSE_SHARED_LIBADD,${_product_capital}_SHARED_LIBADD,g" \
+				  -e "s,pfSense,${PRODUCT_NAME},g" \
+				  -e "s,pfSense.c,${PRODUCT_NAME}\.c,g" \
+				${_pdir}/${_pname}/files/config.m4
 
-				sed -i '' -e "s,COMPILE_DL_PFSENSE,COMPILE_DL_${_product_capital}," \
-					  -e "s,pfSense_module_entry,${PRODUCT_NAME}_module_entry,g" \
-					  -e "s,php_pfSense.h,php_${PRODUCT_NAME}\.h,g" \
-					  -e "s,pfSense_arginfo.h,${PRODUCT_NAME}_arginfo\.h,g" \
-					  -e "s,pfSense_private.h,${PRODUCT_NAME}_private\.h,g" \
-					  -e "/ZEND_GET_MODULE/ s,pfSense,${PRODUCT_NAME}," \
-					  -e "/PHP_PFSENSE_WORLD_EXTNAME/ s,pfSense,${PRODUCT_NAME}," \
-					${_pdir}/${_pname}/files/pfSense.c \
-					${_pdir}/${_pname}/files/pfSense_arginfo.h \
-					${_pdir}/${_pname}/files/pfSense.stub.php \
-					${_pdir}/${_pname}/files/pfSense_private.h \
-					${_pdir}/${_pname}/files/php_pfSense.h
-			fi
+			sed -i '' -e "s,COMPILE_DL_PFSENSE,COMPILE_DL_${_product_capital}," \
+				  -e "s,pfSense_module_entry,${PRODUCT_NAME}_module_entry,g" \
+				  -e "s,php_pfSense.h,php_${PRODUCT_NAME}\.h,g" \
+				  -e "/ZEND_GET_MODULE/ s,pfSense,${PRODUCT_NAME}," \
+				  -e "/PHP_PFSENSE_WORLD_EXTNAME/ s,pfSense,${PRODUCT_NAME}," \
+				${_pdir}/${_pname}/files/pfSense.c \
+				${_pdir}/${_pname}/files/dummynet.c \
+				${_pdir}/${_pname}/files/php_pfSense.h
+		fi
 
 		if [ -d ${_pdir}/${_pname}/files ]; then
 			for fd in $(find ${_pdir}/${_pname}/files -name '*pfSense*'); do
@@ -2035,9 +2028,7 @@ poudriere_bulk() {
 	cat <<EOF >>/usr/local/etc/poudriere.d/${POUDRIERE_PORTS_NAME}-make.conf
 
 PKG_REPO_BRANCH_DEVEL=${PKG_REPO_BRANCH_DEVEL}
-PKG_REPO_BRANCH_NEXT=${PKG_REPO_BRANCH_NEXT}
 PKG_REPO_BRANCH_RELEASE=${PKG_REPO_BRANCH_RELEASE}
-PKG_REPO_BRANCH_PREVIOUS=${PKG_REPO_BRANCH_PREVIOUS}
 PKG_REPO_SERVER_DEVEL=${PKG_REPO_SERVER_DEVEL}
 PKG_REPO_SERVER_RELEASE=${PKG_REPO_SERVER_RELEASE}
 POUDRIERE_PORTS_NAME=${POUDRIERE_PORTS_NAME}
@@ -2140,7 +2131,7 @@ EOF
 
 	if [ "${AWS}" = 1 ]; then
 		echo ">>> Run poudriere distclean to prune old distfiles..." | tee -a ${LOGFILE}
-		if ! poudriere distclean -f ${_bulk} -p ${POUDRIERE_PORTS_NAME} -n; then
+		if ! poudriere distclean -f ${_bulk} -p ${POUDRIERE_PORTS_NAME} -y; then
 			echo ">>> ERROR: Something went wrong..."
 			print_error_pfS
 		fi
