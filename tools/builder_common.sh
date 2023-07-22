@@ -269,12 +269,12 @@ make_world() {
 		-s ${FREEBSD_SRC_DIR} \
 		-d ${STAGE_CHROOT_DIR} \
 		|| print_error_pfS
-
+echo ">>>Starting cross compiling - kontrol commented out"
 	# Use the builder cross compiler from obj to produce the final binary.
 	BUILD_CC="${MAKEOBJDIRPREFIX}${FREEBSD_SRC_DIR}/${TARGET}.${TARGET_ARCH}/tmp/usr/bin/cc"
 
 	[ -f "${BUILD_CC}" ] || print_error_pfS
-
+echo ">>>Starting crypto tools - kontrol commented out"
 	# XXX It must go to the scripts
 	[ -d "${STAGE_CHROOT_DIR}/usr/local/bin" ] \
 		|| mkdir -p ${STAGE_CHROOT_DIR}/usr/local/bin
@@ -285,23 +285,23 @@ make_world() {
 #	(script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/ath/athstats ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
 	echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Finished - $(LC_ALL=C date))" | tee -a ${LOGFILE}
 
-	if [ "${PRODUCT_NAME}" = "pfSense" -a -n "${GNID_REPO_BASE}" ]; then
-		echo ">>> Building gnid... " | tee -a ${LOGFILE}
-		(\
-			cd ${GNID_SRC_DIR} && \
-			make \
-				CC=${BUILD_CC} \
-				INCLUDE_DIR=${GNID_INCLUDE_DIR} \
-				LIBCRYPTO_DIR=${GNID_LIBCRYPTO_DIR} \
-			clean gnid \
-		) || print_error_pfS
-		install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
-			${STAGE_CHROOT_DIR}/usr/sbin \
-			|| print_error_pfS
-		install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
-			${INSTALLER_CHROOT_DIR}/usr/sbin \
-			|| print_error_pfS
-	fi
+	# if [ "${PRODUCT_NAME}" = "pfSense" -a -n "${GNID_REPO_BASE}" ]; then
+	# 	echo ">>> Building gnid... " | tee -a ${LOGFILE}
+	# 	(\
+	# 		cd ${GNID_SRC_DIR} && \
+	# 		make \
+	# 			CC=${BUILD_CC} \
+	# 			INCLUDE_DIR=${GNID_INCLUDE_DIR} \
+	# 			LIBCRYPTO_DIR=${GNID_LIBCRYPTO_DIR} \
+	# 		clean gnid \
+	# 	) || print_error_pfS
+	# 	install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
+	# 		${STAGE_CHROOT_DIR}/usr/sbin \
+	# 		|| print_error_pfS
+	# 	install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
+	# 		${INSTALLER_CHROOT_DIR}/usr/sbin \
+	# 		|| print_error_pfS
+	# fi
 
 	unset makeargs
 }
@@ -1580,24 +1580,30 @@ poudriere_rename_ports() {
 			  -e "/^MAINTAINER=/ s,^.*$,MAINTAINER=	${PRODUCT_EMAIL}," \
 			${_pdir}/${_pname}/Makefile ${_pdescr} ${_plist}
 
-		# PHP module is special
-		if echo "${_pname}" | grep -q "^php[0-9]*-${PRODUCT_NAME}-module"; then
-			local _product_capital=$(echo ${PRODUCT_NAME} | tr '[a-z]' '[A-Z]')
-			sed -i '' -e "s,PHP_PFSENSE,PHP_${_product_capital},g" \
-				  -e "s,PFSENSE_SHARED_LIBADD,${_product_capital}_SHARED_LIBADD,g" \
-				  -e "s,pfSense,${PRODUCT_NAME},g" \
-				  -e "s,pfSense.c,${PRODUCT_NAME}\.c,g" \
-				${_pdir}/${_pname}/files/config.m4
+			# PHP module is special
+			if echo "${_pname}" | grep -q "^php[0-9]*-${PRODUCT_NAME}-module"; then
+				local _product_capital=$(echo ${PRODUCT_NAME} | tr '[a-z]' '[A-Z]')
+				sed -i '' -e "s,PHP_PFSENSE,PHP_${_product_capital},g" \
+					  -e "s,PFSENSE_SHARED_LIBADD,${_product_capital}_SHARED_LIBADD,g" \
+					  -e "s,pfSense,${PRODUCT_NAME},g" \
+					  -e "s,pfSense_arginfo.h,${PRODUCT_NAME}_arginfo\.h,g" \
+					  -e "s,pfSense_private.h,${PRODUCT_NAME}_private\.h,g" \
+					  -e "s,pfSense.c,${PRODUCT_NAME}\.c,g" \
+					${_pdir}/${_pname}/files/config.m4
 
-			sed -i '' -e "s,COMPILE_DL_PFSENSE,COMPILE_DL_${_product_capital}," \
-				  -e "s,pfSense_module_entry,${PRODUCT_NAME}_module_entry,g" \
-				  -e "s,php_pfSense.h,php_${PRODUCT_NAME}\.h,g" \
-				  -e "/ZEND_GET_MODULE/ s,pfSense,${PRODUCT_NAME}," \
-				  -e "/PHP_PFSENSE_WORLD_EXTNAME/ s,pfSense,${PRODUCT_NAME}," \
-				${_pdir}/${_pname}/files/pfSense.c \
-				${_pdir}/${_pname}/files/dummynet.c \
-				${_pdir}/${_pname}/files/php_pfSense.h
-		fi
+				sed -i '' -e "s,COMPILE_DL_PFSENSE,COMPILE_DL_${_product_capital}," \
+					  -e "s,pfSense_module_entry,${PRODUCT_NAME}_module_entry,g" \
+					  -e "s,php_pfSense.h,php_${PRODUCT_NAME}\.h,g" \
+					  -e "s,pfSense_arginfo.h,${PRODUCT_NAME}_arginfo\.h,g" \
+					  -e "s,pfSense_private.h,${PRODUCT_NAME}_private\.h,g" \
+					  -e "/ZEND_GET_MODULE/ s,pfSense,${PRODUCT_NAME}," \
+					  -e "/PHP_PFSENSE_WORLD_EXTNAME/ s,pfSense,${PRODUCT_NAME}," \
+					${_pdir}/${_pname}/files/pfSense.c \
+					${_pdir}/${_pname}/files/pfSense_arginfo.h \
+					${_pdir}/${_pname}/files/pfSense.stub.php \
+					${_pdir}/${_pname}/files/pfSense_private.h \
+					${_pdir}/${_pname}/files/php_pfSense.h
+			fi
 
 		if [ -d ${_pdir}/${_pname}/files ]; then
 			for fd in $(find ${_pdir}/${_pname}/files -name '*pfSense*'); do
