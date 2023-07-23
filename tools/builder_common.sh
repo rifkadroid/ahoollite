@@ -185,7 +185,7 @@ build_all_kernels() {
 		#rm -rf $KERNEL_DESTDIR 2>&1 1>/dev/null
 	done
 }
-echo "######################## INSTALANDO KERNEL KERNEL ##############################"
+echo "######################## INSTALANDO KERNEL  ##############################"
 install_default_kernel() {
 	if [ -z "${1}" ]; then
 		echo ">>> ERROR: install_default_kernel called without a kernel config name"| tee -a ${LOGFILE}
@@ -198,6 +198,7 @@ install_default_kernel() {
 
 	# Copy kernel package to chroot, otherwise pkg won't find it to install
 	echo "######################## COPIANDO KERNEL ##############################"
+	cp -R /usr/Kontrol/tmp/installer-dir/boot/* /usr/Kontrol/tmp/final-dir/boot/
 	if ! pkg_chroot_add ${FINAL_CHROOT_DIR} kernel-${KERNEL_NAME}; then
 		echo ">>> ERROR: Error installing kernel package $(get_pkg_name kernel-${KERNEL_NAME}).txz" | tee -a ${LOGFILE}
 		print_error_pfS
