@@ -182,10 +182,10 @@ build_all_kernels() {
 		echo ">>> Creating pkg of $KERNEL_NAME kernel to staging area..."  | tee -a ${LOGFILE}
 		core_pkg_create kernel ${KERNEL_NAME} ${CORE_PKG_VERSION} ${KERNEL_DESTDIR} "./boot/kernel ./boot/modules"
 
-		rm -rf $KERNEL_DESTDIR 2>&1 1>/dev/null
+		#rm -rf $KERNEL_DESTDIR 2>&1 1>/dev/null
 	done
 }
-
+echo "######################## INSTALANDO KERNEL KERNEL ##############################"
 install_default_kernel() {
 	if [ -z "${1}" ]; then
 		echo ">>> ERROR: install_default_kernel called without a kernel config name"| tee -a ${LOGFILE}
@@ -197,6 +197,7 @@ install_default_kernel() {
 	echo -n ">>> Installing kernel to be used by image ${KERNEL_NAME}..." | tee -a ${LOGFILE}
 
 	# Copy kernel package to chroot, otherwise pkg won't find it to install
+	echo "######################## COPIANDO KERNEL ##############################"
 	if ! pkg_chroot_add ${FINAL_CHROOT_DIR} kernel-${KERNEL_NAME}; then
 		echo ">>> ERROR: Error installing kernel package $(get_pkg_name kernel-${KERNEL_NAME}).txz" | tee -a ${LOGFILE}
 		print_error_pfS
