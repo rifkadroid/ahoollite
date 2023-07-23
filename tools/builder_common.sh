@@ -182,7 +182,7 @@ build_all_kernels() {
 		echo ">>> Creating pkg of $KERNEL_NAME kernel to staging area..."  | tee -a ${LOGFILE}
 		core_pkg_create kernel ${KERNEL_NAME} ${CORE_PKG_VERSION} ${KERNEL_DESTDIR} "./boot/kernel ./boot/modules"
 
-		#rm -rf $KERNEL_DESTDIR 2>&1 1>/dev/null
+	#rm -rf $KERNEL_DESTDIR 2>&1 1>/dev/null
 	done
 }
 
