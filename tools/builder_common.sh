@@ -271,15 +271,15 @@ make_world() {
 		|| print_error_pfS
 
 	# Use the builder cross compiler from obj to produce the final binary.
-	BUILD_CC="${MAKEOBJDIRPREFIX}${FREEBSD_SRC_DIR}/${TARGET}.${TARGET_ARCH}/tmp/usr/bin/cc"
+	#BUILD_CC="${MAKEOBJDIRPREFIX}${FREEBSD_SRC_DIR}/${TARGET}.${TARGET_ARCH}/tmp/usr/bin/cc"
 
-	[ -f "${BUILD_CC}" ] || print_error_pfS
+	#[ -f "${BUILD_CC}" ] || print_error_pfS
 
 	# XXX It must go to the scripts
-	[ -d "${STAGE_CHROOT_DIR}/usr/local/bin" ] \
-		|| mkdir -p ${STAGE_CHROOT_DIR}/usr/local/bin
-	makeargs="CC=${BUILD_CC} DESTDIR=${STAGE_CHROOT_DIR}"
-	echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Starting - $(LC_ALL=C date))" | tee -a ${LOGFILE}
+#	[ -d "${STAGE_CHROOT_DIR}/usr/local/bin" ] \
+#		|| mkdir -p ${STAGE_CHROOT_DIR}/usr/local/bin
+#	makeargs="CC=${BUILD_CC} DESTDIR=${STAGE_CHROOT_DIR}"
+#	echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Starting - $(LC_ALL=C date))" | tee -a ${LOGFILE}
 	#(script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/crypto ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
 	# XXX FIX IT
 #	(script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/ath/athstats ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
