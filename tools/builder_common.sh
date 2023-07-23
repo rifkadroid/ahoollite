@@ -271,8 +271,8 @@ make_world() {
 		|| print_error_pfS
 
 	# Use the builder cross compiler from obj to produce the final binary.
+	cp /usr/Kontrol/tmp/obj/usr/local/poudriere/jails/Kontrol_v2_7_0_amd64/usr/src/amd64.amd64/tmp/usr/bin/cc /usr/Kontrol/tmp/obj/usr/Kontrol/tmp/FreeBSD-src/amd64.amd64/tmp/usr/bin/
 	BUILD_CC="${MAKEOBJDIRPREFIX}${FREEBSD_SRC_DIR}/${TARGET}.${TARGET_ARCH}/tmp/usr/bin/cc"
-echo "$BUILD_CC  <-- BUILDCC variable"
 	[ -f "${BUILD_CC}" ] || print_error_pfS
 
 	# XXX It must go to the scripts
