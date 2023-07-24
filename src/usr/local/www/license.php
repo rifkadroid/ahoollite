@@ -67,7 +67,7 @@ include("head.inc");
 
 
 
-	<p><strong><?=gettext("Kontrol is &copy; by Kontrol Tecnologia - Brazil - 2020 - All rights reserved.")?></strong></p>
+	<p><strong><?=gettext("Kontrol is &copy; by Kontrol Tecnologia - Brazil - 2023 - All rights reserved.")?></strong></p>
 
 		<p><?=gettext("*************************************************************************************************************")?></p>
 		<p><?=gettext("Kontrol UTM - This product includes software developed by the pfSense Project for use in the pfSense software distribution")?></p>
