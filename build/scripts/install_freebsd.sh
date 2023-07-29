@@ -151,7 +151,7 @@ make_cmd="make -C ${srcdir} -s ${j}"
 
 if [ -z "${skip_kernel}" ]; then
 	run "Installing kernel" \
-		"${make_cmd} KERNCONF=${KERNCONF:-pfSense} installkernel"
+		"${make_cmd} KERNCONF=${KERNCONF:-Kontrol} installkernel"
 
 	[ -n "${gzip_kernel}" ] \
 		&& run "Compressing kernel" \
