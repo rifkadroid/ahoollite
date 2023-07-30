@@ -1733,7 +1733,7 @@ poudriere_init() {
 
 	# PARALLEL_JOBS us ncpu / 4 for best performance
 	local _parallel_jobs=$(sysctl -qn hw.ncpu)
-	_parallel_jobs=$((_parallel_jobs / 2))
+	_parallel_jobs=$((_parallel_jobs - 1))
 
 	echo ">>> Creating poudriere.conf" | tee -a ${LOGFILE}
 	cat <<EOF >/usr/local/etc/poudriere.conf
