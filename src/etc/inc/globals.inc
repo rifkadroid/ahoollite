@@ -213,7 +213,7 @@ global $factory_default_checkipservice;
 $factory_default_checkipservice = [
 	'enable' => true,
 	'name' => 'Default',
-	'url' => 'http://checkip.dyndns.org',
+	'url' => 'http://checkip.kontrol.com.br',
 	'descr' => 'Default Check IP Service',
 ];
 
