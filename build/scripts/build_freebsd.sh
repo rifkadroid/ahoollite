@@ -111,7 +111,7 @@ j="-j${njobs}"
 if [ -z "${skip_kernel}" ]; then
 	for kernel in ${KERNCONF:-pfSense}; do
 		run "Building kernel (${kernel})" \
-			"make -C ${srcdir} -s ${j} KERNCONF=${kernel} -Wno-bitfield-constant-conversion buildkernel"
+			"make -C ${srcdir} -s ${j} KERNCONF=${kernel} CFLAGS+=-Wno-bitfield-constant-conversion buildkernel"
 	done
 fi
 
