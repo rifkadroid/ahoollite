@@ -277,32 +277,32 @@ make_world() {
 	[ -f "${BUILD_CC}" ] || print_error_pfS
 
 	# XXX It must go to the scripts
-	[ -d "${STAGE_CHROOT_DIR}/usr/local/bin" ] \
-		|| mkdir -p ${STAGE_CHROOT_DIR}/usr/local/bin
-	makeargs="CC=${BUILD_CC} DESTDIR=${STAGE_CHROOT_DIR}"
-	echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Starting - $(LC_ALL=C date))" | tee -a ${LOGFILE}
+	#[ -d "${STAGE_CHROOT_DIR}/usr/local/bin" ] \
+	#	|| mkdir -p ${STAGE_CHROOT_DIR}/usr/local/bin
+	#makeargs="CC=${BUILD_CC} DESTDIR=${STAGE_CHROOT_DIR}"
+	#echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Starting - $(LC_ALL=C date))" | tee -a ${LOGFILE}
 	#(script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/crypto ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
 	# XXX FIX IT
 #	(script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/ath/athstats ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
-	echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Finished - $(LC_ALL=C date))" | tee -a ${LOGFILE}
+	#echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Finished - $(LC_ALL=C date))" | tee -a ${LOGFILE}
 
-	if [ "${PRODUCT_NAME}" = "pfSense" -a -n "${GNID_REPO_BASE}" ]; then
-		echo ">>> Building gnid... " | tee -a ${LOGFILE}
-		(\
-			cd ${GNID_SRC_DIR} && \
-			make \
-				CC=${BUILD_CC} \
-				INCLUDE_DIR=${GNID_INCLUDE_DIR} \
-				LIBCRYPTO_DIR=${GNID_LIBCRYPTO_DIR} \
-			clean gnid \
-		) || print_error_pfS
-		install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
-			${STAGE_CHROOT_DIR}/usr/sbin \
-			|| print_error_pfS
-		install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
-			${INSTALLER_CHROOT_DIR}/usr/sbin \
-			|| print_error_pfS
-	fi
+	# if [ "${PRODUCT_NAME}" = "pfSense" -a -n "${GNID_REPO_BASE}" ]; then
+	# 	echo ">>> Building gnid... " | tee -a ${LOGFILE}
+	# 	(\
+	# 		cd ${GNID_SRC_DIR} && \
+	# 		make \
+	# 			CC=${BUILD_CC} \
+	# 			INCLUDE_DIR=${GNID_INCLUDE_DIR} \
+	# 			LIBCRYPTO_DIR=${GNID_LIBCRYPTO_DIR} \
+	# 		clean gnid \
+	# 	) || print_error_pfS
+	# 	install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
+	# 		${STAGE_CHROOT_DIR}/usr/sbin \
+	# 		|| print_error_pfS
+	# 	install -o root -g wheel -m 0700 ${GNID_SRC_DIR}/gnid \
+	# 		${INSTALLER_CHROOT_DIR}/usr/sbin \
+	# 		|| print_error_pfS
+	# fi
 
 	unset makeargs
 }
