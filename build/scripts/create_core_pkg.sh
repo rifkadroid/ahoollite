@@ -103,8 +103,8 @@ done
 	&& err "destination path already exists and is not a directory"
 
 : ${TMPDIR=/tmp}
-: ${PRODUCT_NAME=pfSense}
-: ${PRODUCT_URL=http://www.pfsense.org/}
+: ${PRODUCT_NAME=Kontrol}
+: ${PRODUCT_URL=https://kontrol.com.br/}
 
 [ -d $destdir ] \
 	|| mkdir -p ${destdir}
