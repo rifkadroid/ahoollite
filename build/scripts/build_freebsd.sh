@@ -106,7 +106,7 @@ j="-j${njobs}"
 
 [ -z "${skip_world}" ] \
 	&& run "Building world" \
-		"make -C ${srcdir} -s ${j} buildworld"
+		"make -C ${srcdir} -s ${j} WERROR=-Wno-bitfield-constant-conversion buildworld"
 
 if [ -z "${skip_kernel}" ]; then
 	for kernel in ${KERNCONF:-pfSense}; do
