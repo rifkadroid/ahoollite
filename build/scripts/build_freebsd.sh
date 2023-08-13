@@ -110,9 +110,10 @@ j="-j${njobs}"
 
 if [ -z "${skip_kernel}" ]; then
 	for kernel in ${KERNCONF:-Kontrol}; do
+			echo "Kernel ${kernel} - Starting building process"
 		run "Building kernel (${kernel})" \
 			"make -C ${srcdir} -s ${j} KERNCONF=${kernel} WERROR=-Wno-bitfield-constant-conversion buildkernel"
-			echo "Kernel ${kernel} building process Complete!"
+			echo "Kernel ${kernel} building process completed!"
 	done
 fi
 
