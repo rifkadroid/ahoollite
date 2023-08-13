@@ -112,6 +112,7 @@ if [ -z "${skip_kernel}" ]; then
 	for kernel in ${KERNCONF:-Kontrol}; do
 		run "Building kernel (${kernel})" \
 			"make -C ${srcdir} -s ${j} KERNCONF=${kernel} WERROR=-Wno-bitfield-constant-conversion buildkernel"
+			echo "Kernel ${kernel} building process Complete!"
 	done
 fi
 
