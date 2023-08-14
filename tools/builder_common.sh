@@ -271,20 +271,20 @@ make_world() {
 		|| print_error_pfS
 
 	# Use the builder cross compiler from obj to produce the final binary.
-	cp /usr/bin/cc /usr/Kontrol/tmp/obj/usr/Kontrol/tmp/FreeBSD-src/amd64.amd64/tmp/usr/bin/
+	#cp /usr/bin/cc /usr/Kontrol/tmp/obj/usr/Kontrol/tmp/FreeBSD-src/amd64.amd64/tmp/usr/bin/
 	BUILD_CC="${MAKEOBJDIRPREFIX}${FREEBSD_SRC_DIR}/${TARGET}.${TARGET_ARCH}/tmp/usr/bin/cc"
 
 	[ -f "${BUILD_CC}" ] || print_error_pfS
 
 	# XXX It must go to the scripts
-	#[ -d "${STAGE_CHROOT_DIR}/usr/local/bin" ] \
-	#	|| mkdir -p ${STAGE_CHROOT_DIR}/usr/local/bin
-	#makeargs="CC=${BUILD_CC} DESTDIR=${STAGE_CHROOT_DIR}"
-	#echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Starting - $(LC_ALL=C date))" | tee -a ${LOGFILE}
-	#(script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/crypto ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
+	[ -d "${STAGE_CHROOT_DIR}/usr/local/bin" ] \
+		|| mkdir -p ${STAGE_CHROOT_DIR}/usr/local/bin
+	makeargs="CC=${BUILD_CC} DESTDIR=${STAGE_CHROOT_DIR}"
+	echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Starting - $(LC_ALL=C date))" | tee -a ${LOGFILE}
+	(script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/crypto ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
 	# XXX FIX IT
-#	(script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/ath/athstats ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
-	#echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Finished - $(LC_ALL=C date))" | tee -a ${LOGFILE}
+# (script -aq $LOGFILE make -C ${FREEBSD_SRC_DIR}/tools/tools/ath/athstats ${makeargs} clean all install || print_error_pfS;) | egrep '^>>>' | tee -a ${LOGFILE}
+	echo ">>> Building and installing crypto tools and athstats for ${TARGET} architecture... (Finished - $(LC_ALL=C date))" | tee -a ${LOGFILE}
 
 	# if [ "${PRODUCT_NAME}" = "pfSense" -a -n "${GNID_REPO_BASE}" ]; then
 	# 	echo ">>> Building gnid... " | tee -a ${LOGFILE}
