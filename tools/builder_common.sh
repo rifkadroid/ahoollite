@@ -271,7 +271,7 @@ make_world() {
 		|| print_error_pfS
 
 	# Use the builder cross compiler from obj to produce the final binary.
-	cp /usr/bin/cc /usr/Kontrol/tmp/obj/usr/Kontrol/tmp/FreeBSD-src/amd64.amd64/tmp/usr/bin/
+	cp /usr/bin/cc /usr/Kontrol/tmp/obj/usr/Kontrol/tmp/FreeBSD-src/amd64.amd64/tmp/usr/bin/ #Added by Fabricio to workaround missing cc (line below)
 	BUILD_CC="${MAKEOBJDIRPREFIX}${FREEBSD_SRC_DIR}/${TARGET}.${TARGET_ARCH}/tmp/usr/bin/cc"
 
 	[ -f "${BUILD_CC}" ] || print_error_pfS
