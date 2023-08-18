@@ -1379,7 +1379,7 @@ pkg_repo_rsync() {
 		if [ -e ${_pkgfile} ]; then
 			echo -n ">>> Signing Latest/pkg.pkg for bootstraping... " | tee -a ${_logfile}
 
-			if sha256 -q ${_pkgfile} | ${PKG_REPO_SIGNING_COMMAND} \
+			if sha256 -q ${_pkgfile} | tr -d '\n' | ${PKG_REPO_SIGNING_COMMAND} \
 			    > ${_pkgfile}.sig 2>/dev/null; then
 				# XXX Temporary workaround to create link to pkg sig
 				[ -e ${_repo_path}/Latest/pkg.pkg ] && \
