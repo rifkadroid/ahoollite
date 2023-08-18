@@ -112,7 +112,7 @@ if [ -z "${skip_kernel}" ]; then
 	for kernel in ${KERNCONF:-Kontrol}; do
 			echo "Kernel ${kernel} - Starting building process"
 		run "Building kernel (${kernel})" \
-			"make -C ${srcdir} -s ${j} KERNCONF=${kernel} WERROR=-Wno-bitfield-constant-conversion buildkernel"
+			"make -C ${srcdir} -s ${j} KERNCONF=${kernel} -I /usr/Kontrol/tmp/FreeBSD-src/contrib/llvm-project/clang/lib/Headers/ WERROR=-Wno-bitfield-constant-conversion buildkernel"
 			echo "Kernel ${kernel} building process completed!"
 	done
 fi
