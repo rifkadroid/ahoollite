@@ -103,7 +103,7 @@ j="-j${njobs}"
 
 [ -n "${objdir}" ] \
 	&& export MAKEOBJDIRPREFIX=${objdir}
-
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/root/bin:/usr/src/contrib/llvm-project/clang/lib/Headers/
 [ -z "${skip_world}" ] \
 	&& run "Building world" \
 		"make -C ${srcdir} -s ${j} WERROR=-Wno-bitfield-constant-conversion buildworld"
