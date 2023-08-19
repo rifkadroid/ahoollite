@@ -150,8 +150,8 @@ make_cmd="make -C ${srcdir} -s ${j}"
 		"${make_cmd} installworld"
 
 if [ -z "${skip_kernel}" ]; then
-	run "########Copying missing modules to stage kernel folder########" \
-	"mkdir ${destdir}/boot/" && "mkdir ${destdir}/boot/kernel/" && \
+	run "######## Copying missing modules to stage kernel folder ########" \
+	"mkdir -p ${destdir}/boot/kernel/" && \
 	run "cp /boot/modules/*.ko ${destdir}/boot/kernel/" &&  \
 	run "Installing kernel" \
 		"${make_cmd} KERNCONF=${KERNCONF:-Kontrol} installkernel"
