@@ -1171,7 +1171,7 @@ pkg_chroot() {
 		_params="${_params} --config /tmp/pkg/pkg.conf "
 	fi
 	script -aq ${BUILDER_LOGS}/install_pkg_install_ports.txt \
-		chroot ${_root} pkg ${_params}$@ >/dev/null 2>&1
+		chroot ${_root} pkg ${_params}$@ 
 	local result=$?
 	rm -f ${_root}/etc/resolv.conf
 	/sbin/umount -f ${_root}/dev
