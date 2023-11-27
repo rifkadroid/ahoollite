@@ -340,32 +340,45 @@ if [ -z "${_SKIP_REBUILD_PRESTAGE}" ]; then
 		&& rm -rf ${CORE_PKG_PATH}
 
 	# Cleanup environment before start
+	echo "Starting CLEAN_BUILDER process ********************************************************************************************"
 	clean_builder
-
+	echo "FINISHED CLEAN_BUILDER process ********************************************************************************************"
 	# Make sure source directories are present.
+	echo "Starting update_freebsd_sources process **********************************************************************************"
 	update_freebsd_sources
+	echo "FINISHED update_freebsd_sources process ***********************************************************************************"
+	echo "Starting git_last_commit process ******************************************************************************************"
 	git_last_commit
+	echo "FINISHED git_last_commit process ******************************************************************************************"
 
 	# Ensure binaries are present that builder system requires
+	echo "Starting depend_check process **********************************************************************************************"
 	depend_check
-
+	echo "FINISHED depend_check process **********************************************************************************************"
 	# Build world, kernel and install
+	echo "Starting make_world process ************************************************************************************************"
 	make_world
-
+	echo "FINISHED make_world process ************************************************************************************************"
 	# Build kernels
+	echo "Starting build_all_kernels process ******************************************************************************************"
 	build_all_kernels
-
+	echo "FINISHED build_all_kernels process ******************************************************************************************"
 	# Install kernel on installer
+	echo "Starting installkernel process **********************************************************************************************"
 	installkernel ${INSTALLER_CHROOT_DIR} ${PRODUCT_NAME}
-
+	echo "FINISHED installkernel process **********************************************************************************************"
 	# Prepare pre-final staging area
+	echo "Starting clone_to_staging_area process ***************************************************************************************"
 	clone_to_staging_area
-
+	echo "FINISHED clone_to_staging_area process ***************************************************************************************"
 	# Install packages needed for Product
+	echo "Starting install_pkg_install_ports process ************************************************************************************"
 	install_pkg_install_ports
-
+	echo "FINISHED install_pkg_install_ports process ***********************************************************************************"
 	# Create core repo
+	echo "Starting core_pkg_create_repo process ****************************************************************************************"
 	core_pkg_create_repo
+	echo "FINISHED core_pkg_create_repo process ****************************************************************************************"
 fi
 
 # Send core repo to staging area
