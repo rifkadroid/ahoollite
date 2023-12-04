@@ -1012,6 +1012,7 @@ setup_pkg_repo() {
 	local _staging="${5}"
 	local _pkg_conf="${6}"
 	local _mirror_type="none"
+	local MIRROR_TYPE="none"
 	local _signature_type="fingerprints"
 
 	if [ -z "${_template}" -o ! -f "${_template}" ]; then
