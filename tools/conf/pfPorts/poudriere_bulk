@@ -118,7 +118,7 @@ www/%%PRODUCT_NAME%%-pkg-squidGuard
 www/pound
 converters/base64
 www/sarg
-www/Kontrol-pkg-sarg
+www/ahool-pkg-sarg
 www/e2guardian
-www/Kontrol-pkg-E2guardian5
-www/Kontrol-pkg-KontrolSquid
+www/ahool-pkg-E2guardian5
+www/ahool-pkg-ahoolSquid

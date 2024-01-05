@@ -155,7 +155,7 @@ if (function_exists("display_error_form") && !config_path_enabled('system/webgui
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" href="/css/Kontrol.css" />
+	<link rel="stylesheet" href="/css/ahool.css" />
 	<title><?=gettext("Redirecting..."); ?></title>
 </head>
 <body id="error" class="no-menu">

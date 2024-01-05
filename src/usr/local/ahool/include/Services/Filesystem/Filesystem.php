@@ -19,7 +19,7 @@
  * limitations under the License.
  */
 
-namespace Kontrol\Services\Filesystem;
+namespace ahool\Services\Filesystem;
 
 use Nette\Utils\{
 	Arrays,

@@ -53,7 +53,7 @@ $cert_altname_types = array(
 
 global $p12_encryption_levels;
 $p12_encryption_levels = array(
-	'high'   => gettext('High: AES-256 + SHA256 (Kontrol Software, FreeBSD, Linux, Windows 10)'),
+	'high'   => gettext('High: AES-256 + SHA256 (Ahool Software, FreeBSD, Linux, Windows 10)'),
 	'low'    => gettext('Low: 3DES + SHA1 (macOS, older Windows versions)'),
 	'legacy' => gettext('Legacy: RC2-40 + SHA1 (legacy OS versions)'),
 );

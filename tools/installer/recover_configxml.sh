@@ -40,7 +40,7 @@ done
 # Display a menu with all of the disk choices located above
 if [ -n "${target_list}" ]; then
 	exec 3>&1
-	recover_disk_choice=`echo ${target_list} | xargs dialog --backtitle "Kontrol Installer" \
+	recover_disk_choice=`echo ${target_list} | xargs dialog --backtitle "Ahool Installer" \
 		--title "Recover config.xml and SSH keys" \
 		--menu "Select the partition containing config.xml" \
 		0 0 0 2>&1 1>&3` || exit 1
@@ -86,9 +86,9 @@ if [ -n "${recover_disk}" ] ; then
 			/sbin/kldload zfs
 
 			# Import pool with alternate mount.
-			if /sbin/zpool import | /usr/bin/awk '/pool:/ {print $2}' | /usr/bin/grep -q Kontrol; then
+			if /sbin/zpool import | /usr/bin/awk '/pool:/ {print $2}' | /usr/bin/grep -q ahool; then
 				# If the pool name is pfSense, it's the new style layout
-				pool_name="Kontrol"
+				pool_name="ahool"
 			else
 				# Old pool name
 				pool_name="zroot"

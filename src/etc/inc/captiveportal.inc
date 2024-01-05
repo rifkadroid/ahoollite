@@ -182,7 +182,7 @@ EOD;
 		<input type="submit" name="accept" class="login login-submit" value="Login" id="login" {$disabled}>
 	  </form>
 	  <br  />
-	  <span> <i>Made with &hearts; by</i> <strong>Kontrol</strong></span>
+	  <span> <i>Made with &hearts; by</i> <strong>Ahool</strong></span>
 	</div>
 	<div id="terms">
 		<textarea readonly>{$termsconditions}</textarea>

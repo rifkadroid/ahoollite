@@ -157,7 +157,7 @@ while (is_interface_mismatch() == true) {
 		}
 	}
 	if (set_networking_interfaces_ports() == -1) {
-		echo "\nKontrol cannot continue without at least one Network Interface Card.\n";
+		echo "\nAhool cannot continue without at least one Network Interface Card.\n";
 		echo "\nHalting the system.\n";
 		system("/sbin/shutdown -h now");
 		exit(0);

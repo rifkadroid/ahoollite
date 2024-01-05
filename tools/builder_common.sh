@@ -134,8 +134,8 @@ ensure_kernel_exists() {
 		print_error_pfS
 	fi
 echo "###### Copying and missing modules to kernel stage area ######"
-cp /boot/modules/*.ko /usr/Kontrol/tmp/kernels/Kontrol/boot/kernel/
-kldxref /usr/Kontrol/tmp/kernels/Kontrol/boot/kernel/
+cp /boot/modules/*.ko /usr/ahool/tmp/kernels/ahool/boot/kernel/
+kldxref /usr/ahool/tmp/kernels/ahool/boot/kernel/
 }
 
 get_pkg_name() {
@@ -274,7 +274,7 @@ make_world() {
 		|| print_error_pfS
 
 	# Use the builder cross compiler from obj to produce the final binary.
-	cp /usr/bin/cc /usr/Kontrol/tmp/obj/usr/Kontrol/tmp/FreeBSD-src/amd64.amd64/tmp/usr/bin/ #Added by Fabricio to workaround missing cc (line below)
+	cp /usr/bin/cc /usr/ahool/tmp/obj/usr/ahool/tmp/FreeBSD-src/amd64.amd64/tmp/usr/bin/ #Added by Fabricio to workaround missing cc (line below)
 	BUILD_CC="${MAKEOBJDIRPREFIX}${FREEBSD_SRC_DIR}/${TARGET}.${TARGET_ARCH}/tmp/usr/bin/cc"
 
 	[ -f "${BUILD_CC}" ] || print_error_pfS

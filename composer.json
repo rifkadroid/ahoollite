@@ -1,5 +1,5 @@
 {
-    "name": "kontrol/kontrol",
+    "name": "ahool/ahool",
     "require": {
         "mikehaertl/php-shellcommand": "^1.6",
         "symfony/cache": "^5.3",
@@ -8,15 +8,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Netgate\\": "//usr/local/pfSense/include/Netgate/",
-            "pfSense\\": "//usr/local/pfSense/include/",
-            "Kontrol\\": "//usr/local/Kontrol/include/",
+            "ahool\\": "//usr/local/ahool/include/",
 	    "Tools\\Rector\\": "tools/rector/src",
 	    "Tools\\Rector\\Tests\\": "tools/rector/tests"
         }
     },
     "config": {
-        "vendor-dir": "src/usr/local/Kontrol/include/vendor",
+        "vendor-dir": "src/usr/local/ahool/include/vendor",
         "optimize-autoloader": true
     },
     "require-dev": {

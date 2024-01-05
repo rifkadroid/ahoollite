@@ -151,7 +151,7 @@ make_cmd="make -C ${srcdir} -s ${j}"
 
 if [ -z "${skip_kernel}" ]; then
 	run "Installing kernel" \
-		"${make_cmd} KERNCONF=${KERNCONF:-Kontrol} installkernel"
+		"${make_cmd} KERNCONF=${KERNCONF:-ahool} installkernel"
 
 	[ -n "${gzip_kernel}" ] \
 		&& run "Compressing kernel" \
