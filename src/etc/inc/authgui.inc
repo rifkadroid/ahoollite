@@ -298,7 +298,6 @@ function display_login_form() {
 						<!-- Header left logo box -->
 						<div class="col-sm-4">
 							<div id="logodiv" style="text-align:center" class="nowarning">
-								<?php include("/usr/local/www/logo.svg"); ?>
 							</div>
 						</div>
 
@@ -334,22 +333,21 @@ function display_login_form() {
 	            </div>
 	        </header>
 
-	        <div style="class="<?=$warnclass?>">
-	        	<div class="col-sm-4"></div>
-
+	        <div class="<?=$warnclass?>">
+		<div class="col-sm-4"></div>
 	        	<div class="col-sm-4 offset-md-4 logoCol">
 					<div class="loginCont center-block">
 		                <form method="post" <?=$loginautocomplete?> class="login">
 			                <p class="form-title"><?php include("/usr/local/www/logo.svg"); ?></p>
 			                <input name="usernamefld" id="usernamefld" type="text" placeholder="Username" autocorrect="off" autocapitalize="none"/>
 			                <input name="passwordfld" id="passwordfld" type="password" placeholder="Password" />
-			                <input type="submit" name="login" value="Sign In" class="btn btn-success btn-sm" />
+			                <input type="submit" name="login" value="Log In" class="btn btn-success btn-sm" />
 		                </form>
 					</div>
 	            </div>
 
 	        	<div class="col-sm-4"></div>
-	        </div>
+		</div>
 
 	        <footer id="3">
 	            <div id="footertext">
@@ -359,7 +357,6 @@ function display_login_form() {
 	            </div>
 	        </footer>
 	    </div>
-
 		<script type="text/javascript">
 		//<![CDATA[
 			/* Prevent duplicate submission  */
