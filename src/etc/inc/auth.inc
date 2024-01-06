@@ -2229,11 +2229,9 @@ function session_auth() {
 function print_credit() {
 	global $g;
 
-	return  '<a target="_blank" href="https://kontrol.com.br">' . g_get('product_label') . '</a>' .
+	return  '<a target="_blank" href="https://ahool.com">' . g_get('product_label') . '</a>' .
 			gettext(' is developed and maintained by ') .
-			'<a target="_blank" href="https://kontrol.com.br">Kontrol Tecnologia. </a>' . ' &copy;' . g_get('product_copyright_years') .
-			'<a target="_blank" href="https://kontrol.com.br/empresa">' .
-			gettext(' View license.') . '</a>';
+			'<a target="_blank" href="https://tis.com">TIS</a>' . ' &copy; ';
 }
 function get_user_remote_address($print_all=true) {
 	$remote_address = $_SERVER['REMOTE_ADDR'];

@@ -75,9 +75,9 @@ $g = [
 	'admin_group' => 'admins',
 	'product_name' => 'ahool',
 	'product_label' => 'ahool',
-	'product_label_html' => 'Kontrol Tecnologia<sup>&#174;</sup>',
+	'product_label_html' => 'Ahool<sup>&#174;</sup>',
 	'product_version' => $product_version,
-	'product_copyright_years' => '2016 - ' . $present_year,
+	'product_copyright_years' => '2019 - ' . $present_year,
 	'disablehelpmenu' => true,
 	'disablehelpicon' => true,
 	'disablecrashreporter' => true,
@@ -213,7 +213,7 @@ global $factory_default_checkipservice;
 $factory_default_checkipservice = [
 	'enable' => true,
 	'name' => 'Default',
-	'url' => 'http://checkip.kontrol.com.br',
+	'url' => 'http://checkip.dyndns.org',
 	'descr' => 'Default Check IP Service',
 ];
 

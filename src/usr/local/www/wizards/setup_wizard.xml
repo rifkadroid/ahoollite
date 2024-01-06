@@ -26,16 +26,16 @@
 <totalsteps>10</totalsteps>
 <step>
 	<id>1</id>
-	<title>Kontrol Setup</title>
+	<title>Ahool Setup</title>
 	<disableheader>true</disableheader>
 	<description>
 		<![CDATA[
-		<p><h4>Welcome to Kontrol® software!</h4></p>
-		<p>This wizard will provide guidance through the initial configuration of Kontrol.</p>
+		<p><h4>Welcome to Ahool® software!</h4></p>
+		<p>This wizard will provide guidance through the initial configuration of Ahool.</p>
 		<p>The wizard may be stopped at any time by clicking the logo image at the top of the screen.</p>
-		<p><strong>Kontrol® software is developed and maintained by Kontrol Tecnologia®<strong></p>
+		<p><strong>Ahool® software is developed and maintained by TIS<strong></p>
 		<br />
-		<p><a href="https://kontrol.com.br" class="btn btn-info" target="_blank">Learn more</a></p>
+		<p><a href="https://ahool.com" class="btn btn-info" target="_blank">Learn more</a></p>
 		]]>
 	</description>
 	<fields>
@@ -51,12 +51,12 @@
 </step>
 <step>
 	<id>2</id>
-	<title>Kontrol® Support is available 24/7</title>
+	<title>Ahool® Support is available 24/7</title>
 	<disableheader>true</disableheader>
 	<description>
 	<![CDATA[
 		<p>Our 24/7 team of support engineers are the most qualified to diagnose your issue and resolve it quickly, from branch office to enterprise — on premises to cloud.</p>
-		<p>We offer several support subscription plans tailored to fit different environment sizes and requirements. Many companies around the world choose Kontrol support because:</p>
+		<p>We offer several support subscription plans tailored to fit different environment sizes and requirements. Many companies around the world choose Ahool support because:</p>
 		<p>
 		<ul>
 			<li>Support is available 24 hours a day, seven days a week, including holidays.</li>
@@ -65,7 +65,7 @@
 		</ul>
 		</p>
 		<br />
-		<p><a href="https://kontrol.com.br" class="btn btn-info" target="_blank">Learn more</a></p>
+		<p><a href="https://Ahool.com" class="btn btn-info" target="_blank">Learn more</a></p>
     ]]>
   </description>
 	<fields>
@@ -78,7 +78,7 @@
 <step>
 	<id>3</id>
 	<title>General Information</title>
-	<description>On this screen the general Kontrol parameters will be set.</description>
+	<description>On this screen the general Ahool parameters will be set.</description>
 	<fields>
 		<field>
 			<name>Hostname</name>
@@ -87,7 +87,7 @@
 			<description>
 				<![CDATA[
 				Name of the firewall host, without domain part.&lt;br/&gt;&lt;br/&gt;
-				Examples: Kontrol, firewall, edgefw
+				Examples: Ahool, firewall, edgefw
 				]]>
 			</description>
 			<validate>^[a-zA-Z0-9-]+$</validate>
@@ -601,7 +601,7 @@
 			} else {
 				$_POST['ipaddress'] = $_POST['selectedtype'];
 				$config['interfaces']['wan']['ipaddr'] = $_POST['selectedtype'];
-				write_config(gettext("WAN interface configuration saved via Kontrol setup wizard."));
+				write_config(gettext("WAN interface configuration saved via Ahool setup wizard."));
 			}
 			if (!$config['interfaces']['lan']) {
 				header("Location: /wizard.php?xml=setup_wizard.xml&stepid=6&next=Next");
@@ -745,7 +745,7 @@
 			$admin_user =& getUserEntryByUID(0);
 			local_user_set_password($admin_user, $_POST['adminpassword']);
 			local_user_set($admin_user);
-			write_config(gettext("Admin WebGUI password saved via Kontrol setup wizard."));
+			write_config(gettext("Admin WebGUI password saved via Ahool setup wizard."));
 		} else {
 			print_info_box("Passwords do not match! Please press back in the browser window and correct.");
 			die;
@@ -758,7 +758,7 @@
 	<id>8</id>
 	<title>Reload configuration</title>
 	<disableheader>true</disableheader>
-	<description>Click 'Reload' to reload Kontrol with new changes.</description>
+	<description>Click 'Reload' to reload Ahool with new changes.</description>
 	<fields>
 		<field>
 			<name>Reload</name>
@@ -809,7 +809,7 @@
 		unset($config['wizardtemp']);
 		/* See https://redmine.pfsense.org/issues/8524 */
 		$config['system']['webgui']['althostnames'] = $althosts_before;
-		write_config(gettext("Configuration saved on completion of the Kontrol setup wizard."));
+		write_config(gettext("Configuration saved on completion of the Ahool setup wizard."));
 		reload_all();
 		mwexec_bg("/etc/rc.update_bogons.sh now");
 		touch("{$g['cf_conf_path']}/copynotice_display");
@@ -821,7 +821,7 @@
 	<title>Wizard completed.</title>
 	<stepbeforeformdisplay>
 	<![CDATA[
-		if ($g['product_name'] <> 'Kontrol') {
+		if ($g['product_name'] <> 'Ahool') {
 			header("Location: " . fixup_string("\$myurl"));
 			exit;
 		}
@@ -830,21 +830,21 @@
 	<description>
 	<![CDATA[
 	<div style="padding-right:25px;">
-		<p><h4>Congratulations! Kontrol is now configured.</h4></p>
+		<p><h4>Congratulations! Ahool is now configured.</h4></p>
 		<p>
 		We recommend that you check to see if there are any software updates available. Keeping your software up to date is
 		one of the most important things you can do to maintain the security of your network.</p>
 		<input type="button" onclick="window.location.href='$myurlpkg_mgr_install.php?id=firmware'" class="btn btn-xs btn-success" value="Check for updates"/>
 		</br></br>
 		<p><h4>Remember, we're here to help.</h4></p>
-		<p><a target='_blank' href='https://kontrol.com.br'><strong><span style="font-size:16px">Click here</span></strong></a> to learn about Kontrol 24/7/365 support services.</p>
+		<p><a target='_blank' href='https://Ahool.com'><strong><span style="font-size:16px">Click here</span></strong></a> to learn about Ahool 24/7/365 support services.</p>
 		<br />
 
 		<p><h4>Useful resources.</h4></p>
 		<p>
 			<ul>
-				<li>Learn more about Kontrol's product line, services, and Kontrol software from our <a target='_blank' href='https://kontrol.com.br/produtos'>website</a></li>
-				<li>To learn about Kontrol appliances and other offers, <a target='_blank' href='https://kontrol.com.br'>visit our store</a></li>
+				<li>Learn more about Ahool's product line, services, and Ahool software from our <a target='_blank' href='https://ahool.com/produk'>website</a></li>
+				<li>To learn about Ahool appliances and other offers, <a target='_blank' href='https://ahool.com'>visit our store</a></li>
 
 			</ul>
 		</p>

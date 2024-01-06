@@ -314,7 +314,6 @@ function display_login_form() {
 						<!-- Header right message box (hostname or msg)-->
 						<div class="col-sm-4 nowarning msgbox text-center">
 							<span id="hostspan">
-								<h4><?=$loginbannerstr?></h4>
 							</span>
 						</div>
 					</div>
@@ -335,13 +334,13 @@ function display_login_form() {
 	            </div>
 	        </header>
 
-	        <div style="background: <?=$logincssfile?>;" class="<?=$warnclass?>">
+	        <div style="class="<?=$warnclass?>">
 	        	<div class="col-sm-4"></div>
 
 	        	<div class="col-sm-4 offset-md-4 logoCol">
 					<div class="loginCont center-block">
 		                <form method="post" <?=$loginautocomplete?> class="login">
-			                <p class="form-title">Sign In</p>
+			                <p class="form-title"><?php include("/usr/local/www/logo.svg"); ?></p>
 			                <input name="usernamefld" id="usernamefld" type="text" placeholder="Username" autocorrect="off" autocapitalize="none"/>
 			                <input name="passwordfld" id="passwordfld" type="password" placeholder="Password" />
 			                <input type="submit" name="login" value="Sign In" class="btn btn-success btn-sm" />

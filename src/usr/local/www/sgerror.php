@@ -3,7 +3,7 @@ include "globals.inc";
 include "config.inc";
 $page_info = <<<EOD
 # ----------------------------------------------------------------------------------------------------------------------
-# KONTROL (C) is Copyright -  SquidGuard error page generator
+# Ahool (C) is Copyright -  SquidGuard error page generator
 # This script was based on the original script by (C)2006-2007 Serg Dvoriancev
 # ----------------------------------------------------------------------------------------------------------------------
 # This programm processed redirection to specified URL or generated error page for standart HTTP error code.
@@ -217,7 +217,7 @@ $str[] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/T
 $str[] = '<html>';
 $str[] = '<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title></title></head>';
 
-# Added the 2 lines below to make squidGuard put denied pages into the squid log. (by Kontrol (C) )
+# Added the 2 lines below to make squidGuard put denied pages into the squid log. (by Ahool (C) )
 $sge_prefix=(preg_match("/\?/",$cl['u'])?"&":"?");
 $str[] = '<iframe src="'.$cl['u'].$sge_prefix.'sgr=ACCESSDENIED" width="1" height="1"></iframe>';
 
@@ -233,26 +233,26 @@ if ($cl['t'])        $str[] = "Blacklist: {$cl['t']} | ";
 if ($cl['u'])        $str[] = "URL: {$cl['u']} ";
 
 $str[] = '</div><div style="background-color:#F4F4F4; text-align:center; padding:20px;">';
-$str[] = '<div style="letter-spacing:0.5em; word-spacing:1em; padding:20px; background-color:#FF0000; text-align:center; color:#FFFFFF; font-size:200%; font-weight: bold;">Página Bloqueada</div>';
+$str[] = '<div style="letter-spacing:0.5em; word-spacing:1em; padding:20px; background-color:#FF0000; text-align:center; color:#FFFFFF; font-size:200%; font-weight: bold;">Halaman Terkunci</div>';
 $str[] = '<div style="padding:20px; margin-top:20px; background-color:#E2E2E2; text-align:center; color:#000000; font-family:verdana, arial, sans serif; font-size:80%;">';
 
 if ($cl['u'])        $str[] = "<p><b>URL: {$cl['u']}</b></p>";
 $str[] = '<div style="text-align:left;">';
-$str[] = '<p><b>A URL que você está tentando acessar foi bloqueada pelo Administrador da rede.</b></p>';
+$str[] = '<p><b>URL yang Anda coba akses telah diblokir oleh Administrator Jaringan.</b></p>';
 
-$str[] = '<p><font color="#000000" size="1" face="Verdana, Arial, Helvetica, sans-serif"> Esta página foi bloqueada pelas possíveis razões:</font></p>';
+$str[] = '<p><font color="#000000" size="1" face="Verdana, Arial, Helvetica, sans-serif"> Halaman ini telah diblokir karena kemungkinan alasan:</font></p>';
 $str[] = '<ul>';
-$str[] = '<li><font size="1" face="Verdana, Arial, Helvetica, sans-serif">A página tem conteúdo inapropriado.</font></li>';
-$str[] = '<li><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Seu usuário ID está em um grupo com políticas de restrição.</font></li>';
-$str[] = '<li><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Por favor Clique <a href="javascript:history.back()">aqui</a> para voltar.</font></li>';
-$str[] = '<li id="list3"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> Se você acredita, por alguma razão, que este bloqueio é indevido, entre em contato com o administrador <a href="mailto:administrator@corporation.corp?Subject=Website blocked by Kontrol">E-mail Administrador</a></font></li>';
-$str[] = '<li><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Por favor, inclua detalhes sobre a página bloqueada.</font></li>';
+$str[] = '<li><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Halaman tersebut berisi konten yang tidak pantas.</font></li>';
+$str[] = '<li><font size="1" face="Verdana, Arial, Helvetica, sans-serif">ID pengguna Anda berada dalam grup dengan kebijakan pembatasan.</font></li>';
+$str[] = '<li><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Silakan Klik <a href="javascript:history.back()">di sini</a> untuk kembali.</font></li>';
+$str[] = '<li id="list3"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> Jika Anda yakin, karena alasan apa pun, bahwa pemblokiran ini tidak pantas, harap hubungi administrator Anda<a href="mailto:administrator@corporation.corp?Subject=Website blocked by Ahool">E-mail Administrador</a></font></li>';
+$str[] = '<li><font size="1" face="Verdana, Arial, Helvetica, sans-serif">Harap sertakan detail tentang halaman yang diblokir.</font></li>';
 $str[] = '</ul>';
 
 $str[] = '<p><img style="padding-top:20px;display: block;margin: 0px auto" src="http://'. $_SERVER['HTTP_HOST'] .'/blocked.png" alt="geblockt"></p>';
 $str[] = '<p><img style="padding-top:20px;display: block;margin: 0px auto" src="http://'. $_SERVER['HTTP_HOST'] .'/logo.png" </p></div></div>';
 
-$str[] = '<div style="padding:5px; background-color:#C0C0C0; text-align:right; color:#FFFFFF; font-size:60%; font-family:verdana,arial,sans serif;">Filtered by <a style="color:#FFFFFF;"><b>Kontrol</b></a></div></div>';
+$str[] = '<div style="padding:5px; background-color:#C0C0C0; text-align:right; color:#FFFFFF; font-size:60%; font-family:verdana,arial,sans serif;">Filtered by <a style="color:#FFFFFF;"><b>Ahool</b></a></div></div>';
 $str[] = "</body>";
 $str[] = "</html>";
 

@@ -428,21 +428,8 @@ $diagnostics_menu = msort(array_merge($diagnostics_menu, return_ext_menu("Diagno
 
 if (!g_get('disablehelpmenu')) {
 	$help_menu = array();
-	$help_menu[] = array(gettext("About this Page"), $helpurl);
-	if (g_get('product_name') == "pfSense") {
-		$help_menu[] = array(gettext("Bug Database"), "https://kontrol.com.br/");
-	}
-
-	$help_menu[] = array(gettext("User Forum"), "https://kontrol.com.br");
-	$help_menu[] = array(gettext("Documentation"), "https://kontrol.com.br");
-	$help_menu[] = array(gettext("Paid Support"), "https://kontrol.com.br");
-	$help_menu[] = array(gettext("Kontrol Book"), "https://kontrol.com.br");
-	$help_menu[] = array(gettext("FreeBSD Handbook"), "https://kontrol.com.br");
-	$help_menu[] = array(gettext("User survey"), "https://kontrol.com.br");
-	if  (strpos(g_get('product_label'), 'Plus') === false) {
-		$help_menu[] = array(gettext("Upgrade to pfSense Plus"), "https://kontrol.com.br");
-	}
-	$help_menu = msort(array_merge($help_menu, return_ext_menu("Help")), 0);
+	$help_menu[] = array(gettext("Tentang"), "https://ahool-firewall.tis.com");
+	$help_menu[] = array(gettext("Bug Database"), "https://ahool-firewall.tis.com/issues");
 }
 
 $menuclass = "static";
@@ -483,7 +470,6 @@ if (are_notices_pending()) {
 			</button>
 			<a class="navbar-brand" href="/">
 				<?php include("/usr/local/www/logo.svg"); ?>
-				<span style="color:white;font-size:.6em;text-transform:uppercase;letter-spacing:3px;">KONTROL UTM</span>
 			</a>
 		</div>
 		<div class="collapse navbar-collapse" id="pf-navbar">
