@@ -96,7 +96,7 @@ if (!$pconfig['timezone']) {
 	if (isset($g['default_timezone']) && !empty(g_get('default_timezone'))) {
 		$pconfig['timezone'] = g_get('default_timezone');
 	} else {
-		$pconfig['timezone'] = "Etc/UTC";
+		$pconfig['timezone'] = "Asia/Jakarta";
 	}
 }
 

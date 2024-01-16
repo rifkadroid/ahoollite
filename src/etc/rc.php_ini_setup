@@ -160,7 +160,7 @@ fi
 
 if [ -z "${TIMEZONE}" ]; then
 	# Last option, use default value from $g or Etc/UTC
-	TIMEZONE=$(/usr/local/sbin/read_global_var default_timezone "Etc/UTC")
+	TIMEZONE=$(/usr/local/sbin/read_global_var default_timezone "Asia/Jakarta")
 fi
 
 if echo "${VERSION}" | grep -q RELEASE; then

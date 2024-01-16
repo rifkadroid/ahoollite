@@ -62,7 +62,7 @@ if (isset($config['system']['timezone']) &&
 } elseif (isset($g['default_timezone']) && !empty(g_get('default_timezone'))) {
 	$timezone = g_get('default_timezone');
 } else {
-	$timezone = "Etc/UTC";
+	$timezone = "Asia/Jakarta";
 }
 date_default_timezone_set("$timezone");
 

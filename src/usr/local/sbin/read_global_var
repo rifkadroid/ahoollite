@@ -22,7 +22,7 @@
  */
 
 if (empty(ini_get("date.timezone"))) {
-	ini_set("date.timezone", "Etc/UTC");
+	ini_set("date.timezone", "Asia/Jakarta");
 }
 
 require_once("/etc/inc/globals.inc");

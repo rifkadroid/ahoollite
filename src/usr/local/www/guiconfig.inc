@@ -1194,7 +1194,7 @@ if ($cfgtz) {
 } elseif (isset($g['default_timezone']) && !empty(g_get('default_timezone'))) {
 	$timezone = g_get('default_timezone');
 } else {
-	$timezone = "Etc/UTC";
+	$timezone = "Asia/Jakarta";
 }
 
 /* Remove files we do not want to see in a crash report */
